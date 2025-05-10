@@ -90,8 +90,8 @@
     gap: 20px;
   } */
   .capture-wrapper {
-    position: absolute;
-    bottom: calc(30px + env(safe-area-inset-bottom)); /* Handles iPhone notches too */
+    position: fixed; /* Changed to fixed to ensure it stays visible on screen */
+    bottom: calc(30px + env(safe-area-inset-bottom)); /* Place the buttons just above the bottom */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -99,10 +99,10 @@
     align-items: center;
     gap: 20px;
     padding: 15px 25px;
-    background: rgba(0, 0, 0, 0.3);       /* Translucent */
-    backdrop-filter: blur(10px);          /* Glass effect */
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
-    z-index: 5;
+    z-index: 10; /* Ensure it's above other elements */
   }
   
   #captureBtn {
@@ -133,11 +133,43 @@
     transition: all 0.2s ease;
     backdrop-filter: blur(10px);
     margin-left: 20px;
+    z-index: 11; /* Ensure it is on top of other content */
   }
   
   #toggleCameraBtn:hover {
     background: rgba(255, 255, 255, 0.3);
   }
+
+  /* Media Queries for smaller screens */
+@media (max-width: 768px) {
+    #captureBtn {
+        width: 70px;
+        height: 70px;
+        font-size: 25px;
+    }
+
+    #toggleCameraBtn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    #captureBtn {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+    }
+
+    #toggleCameraBtn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        margin-left: 5px;
+    }
+}
 
   .pulse-ring {
     content: '';

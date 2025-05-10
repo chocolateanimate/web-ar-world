@@ -60,7 +60,6 @@ async function initCamera() {
 
   window.scrollTo(0, 0); // prevents camera resize pushing buttons off-screen
 }
-  
 
 function capturePhoto() {
   canvas.width = video.videoWidth;
@@ -127,6 +126,22 @@ captureBtn.addEventListener('mouseup', () => {
   } else {
     capturePhoto();
   }
+});
+
+// **Add touch event listeners for mobile devices** after the mouse events
+
+// Detect long press for mobile
+captureBtn.addEventListener('touchstart', function(e) {
+  pressTimer = setTimeout(function() {
+    // Handle long press (start recording, etc.)
+    console.log('Long press detected');
+    startRecording(); // Start recording on long press
+  }, 1000); // 1 second for long press
+});
+
+captureBtn.addEventListener('touchend', function(e) {
+  clearTimeout(pressTimer);
+  console.log('Touch ended, no long press');
 });
 
 closeBtn.addEventListener('click', () => {
