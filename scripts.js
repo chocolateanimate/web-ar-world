@@ -28,7 +28,7 @@ async function initCamera() {
 
   const constraints = {
     video: {
-      facingMode: { exact: currentFacing },
+      facingMode: { ideal: currentFacing },
       width: { ideal: 4096 },
       height: { ideal: 2160 }
     },
@@ -37,18 +37,28 @@ async function initCamera() {
 
   try {
     mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+    console.log("Active camera:", mediaStream.getVideoTracks()[0].label);
     video.srcObject = mediaStream;
   } catch (err) {
-    // fallback for exact facingMode error
-    console.warn("Exact facingMode failed, falling back to default.");
+    console.warn("Exact facingMode failed, falling back to default.", err);
+ 
+    // Fallback to generic video input if the ideal facingMode fails
     const fallbackConstraints = {
-      video: true,
+      video: { facingMode: "environment" }, // Try default environment camera
       audio: true
     };
-    mediaStream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
-    video.srcObject = mediaStream;
+      
+    try {
+      mediaStream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
+      console.log("Active camera:", mediaStream.getVideoTracks()[0].label);
+      video.srcObject = mediaStream;
+    } catch (err) {
+      console.error("Failed to access any camera:", err);
+      alert("Could not access the camera. Please try again.");
+    }
   }
 }
+  
 
 function capturePhoto() {
   canvas.width = video.videoWidth;
