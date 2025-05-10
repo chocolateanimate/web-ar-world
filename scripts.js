@@ -6,24 +6,36 @@ const videoPreview = document.getElementById('videoPreview');
 const previewContainer = document.getElementById('preview');
 const downloadBtn = document.getElementById('downloadBtn');
 const closeBtn = document.getElementById('closeBtn');
+const toggleCameraBtn = document.getElementById('toggleCameraBtn');
 
 let mediaStream = null;
 let mediaRecorder;
 let chunks = [];
 let recording = false;
 let pressTimer;
+let currentFacing = "environment";
+let availableCameras = [];
+
+async function getAvailableCameras() {
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  return devices.filter(device => device.kind === "videoinput");
+}
 
 async function initCamera() {
-  try {
-    const constraints = {
-      video: {
-        facingMode: "environment",
-        width: { ideal: 4096 },
-        height: { ideal: 2160 }
-      },
-      audio: true
-    };
+  if (mediaStream) {
+    mediaStream.getTracks().forEach(track => track.stop());
+  }
 
+  const constraints = {
+    video: {
+      facingMode: currentFacing,
+      width: { ideal: 4096 },
+      height: { ideal: 2160 }
+    },
+    audio: true
+  };
+
+  try {
     mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
     video.srcObject = mediaStream;
   } catch (err) {
@@ -103,5 +115,17 @@ closeBtn.addEventListener('click', () => {
   previewContainer.classList.add('hidden');
 });
 
-window.addEventListener('load', initCamera);
+toggleCameraBtn.addEventListener('click', async () => {
+  currentFacing = currentFacing === "environment" ? "user" : "environment";
+  await initCamera();
+});
+
+window.addEventListener('load', async () => {
+  availableCameras = await getAvailableCameras();
+  if (availableCameras.length > 1) {
+    toggleCameraBtn.classList.remove('hidden');
+  }
+  await initCamera();
+});
+
 window.addEventListener('resize', initCamera);
