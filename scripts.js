@@ -57,6 +57,8 @@ async function initCamera() {
       alert("Could not access the camera. Please try again.");
     }
   }
+
+  window.scrollTo(0, 0); // prevents camera resize pushing buttons off-screen
 }
   
 
