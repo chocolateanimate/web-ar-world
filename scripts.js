@@ -28,7 +28,7 @@ async function initCamera() {
 
   const constraints = {
     video: {
-      facingMode: currentFacing,
+      facingMode: { exact: currentFacing },
       width: { ideal: 4096 },
       height: { ideal: 2160 }
     },
@@ -39,8 +39,14 @@ async function initCamera() {
     mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
     video.srcObject = mediaStream;
   } catch (err) {
-    alert("Could not access the camera.");
-    console.error(err);
+    // fallback for exact facingMode error
+    console.warn("Exact facingMode failed, falling back to default.");
+    const fallbackConstraints = {
+      video: true,
+      audio: true
+    };
+    mediaStream = await navigator.mediaDevices.getUserMedia(fallbackConstraints);
+    video.srcObject = mediaStream;
   }
 }
 
