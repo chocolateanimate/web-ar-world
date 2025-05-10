@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <video id="camera" autoplay playsinline></video>
+    <canvas id="canvas" class="hidden"></canvas>
+
+    <div id="preview" class="preview hidden">
+      <img id="photoPreview" class="hidden" />
+      <video id="videoPreview" controls class="hidden"></video>
+
+      <div class="top-buttons">
+        <button id="closeBtn">✕</button>
+        <button id="downloadBtn">⬇ Download</button>
+      </div>
+    </div>
+
+    <div class="capture-wrapper">
+      <button id="captureBtn"><span class="pulse-ring"></span>●</button>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
