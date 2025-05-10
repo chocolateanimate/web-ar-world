@@ -64,7 +64,8 @@ git log --oneline -n 5         # Show the last 5 commit messages
 ### 9. 📝 Add README & Commit It Too
 Anytime you update documentation, follow the same commit cycle:
 ```bash
-git add README.md
+git pull origin main
+git add .
 git commit -m "Updated README with setup instructions"
 git push origin feature/ar-camera
 ```

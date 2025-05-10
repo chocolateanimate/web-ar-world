@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: linear-gradient(145deg, #0f0f0f, #1f1f1f);
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  video#camera, canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(20px);
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .preview img, .preview video {
+    max-width: 90%;
+    max-height: 60vh;
+    border-radius: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .top-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  #downloadBtn, #closeBtn {
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid white;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+  
+  #closeBtn:hover, #downloadBtn:hover {
+    background: rgba(255,255,255,0.4);
+  }
+  
+  .capture-wrapper {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  #captureBtn {
+    position: relative;
+    background: rgba(255,255,255,0.1);
+    border: 4px solid white;
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+  }
+  
+  .pulse-ring {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    animation: none;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  
+  .recording .pulse-ring {
+    animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    70% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .recording {
+    box-shadow: 0 0 20px rgba(0, 153, 255, 0.8);
+    border-color: #00aaff;
+    background-color: rgba(0, 153, 255, 0.2);
+  }
+  
+  .recording .pulse-ring {
+    border-color: #00aaff;
+  }
+  
