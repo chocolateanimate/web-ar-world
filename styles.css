@@ -134,6 +134,11 @@
     backdrop-filter: blur(10px);
     margin-left: 20px;
     z-index: 11; /* Ensure it is on top of other content */
+    visibility: visible; /* Make sure it's visible by default */
+  }
+  
+  #toggleCameraBtn.hidden {
+    visibility: hidden; /* Hide only when needed */
   }
   
   #toggleCameraBtn:hover {

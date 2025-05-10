@@ -142,6 +142,11 @@ captureBtn.addEventListener('touchstart', function(e) {
 captureBtn.addEventListener('touchend', function(e) {
   clearTimeout(pressTimer);
   console.log('Touch ended, no long press');
+  
+  // Stop recording if it was started via long press
+  if (recording) {
+    stopRecording();  // Make sure the video stops when touch ends
+  }
 });
 
 closeBtn.addEventListener('click', () => {
@@ -156,7 +161,9 @@ toggleCameraBtn.addEventListener('click', async () => {
 window.addEventListener('load', async () => {
   availableCameras = await getAvailableCameras();
   if (availableCameras.length > 1) {
-    toggleCameraBtn.classList.remove('hidden');
+    toggleCameraBtn.classList.remove('hidden');  // Ensure this is working
+  } else {
+    toggleCameraBtn.classList.add('hidden');    // Hide when there's only one camera
   }
   await initCamera();
 });
