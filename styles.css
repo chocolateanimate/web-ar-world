@@ -70,9 +70,13 @@
   
   .capture-wrapper {
     position: absolute;
-    bottom: 30px;
+    bottom: 10vh; /* raised more for phones */
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
   }
   
   #captureBtn {
@@ -90,6 +94,23 @@
     overflow: hidden;
   }
   
+  #toggleCameraBtn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid white;
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: background 0.3s ease;
+  }
+  
+  #toggleCameraBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
   .pulse-ring {
     content: '';
     position: absolute;
