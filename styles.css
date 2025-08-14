@@ -1,85 +1,60 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom right, #fff5f7, #fcefe3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #5a3e36;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 .container {
-    text-align: center;
-    padding: 20px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    animation: fadeUp 1.2s ease;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 h1 {
-    font-size: 2.5rem;
-    color: #a6754b;
+  font-size: 2.2rem;
+  color: #b76e79;
+  margin-bottom: 10px;
 }
 
-.subtitle {
-    font-size: 1.1rem;
-    color: #7d5a4f;
-    margin-bottom: 30px;
+p {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.buttons button {
+  margin: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
+#web-btn {
+  background-color: #ffb6b9;
+  color: white;
 }
 
-.btn-web {
-    background: #ffb6c1;
-    color: #fff;
+#app-btn {
+  background-color: #b5ead7;
+  color: black;
 }
 
-.btn-web:hover {
-    background: #ff9aac;
-    transform: scale(1.05);
-}
-
-.btn-snapchat {
-    background: #fffc00;
-    color: #333;
-}
-
-.btn-snapchat:hover {
-    background: #ffe700;
-    transform: scale(1.05);
-}
-
-.fade-in {
-    opacity: 0;
-    animation: fadeIn 1.5s ease forwards;
-}
-
-.fade-in-delay {
-    opacity: 0;
-    animation: fadeIn 1.5s ease 0.5s forwards;
+.buttons button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
