@@ -1,224 +1,35 @@
-* {
-    box-sizing: border-box;
-  }
-  html {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
-  }
-  body {
-    margin: 0;
-    background: linear-gradient(145deg, #0f0f0f, #1f1f1f);
-    font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    background: linear-gradient(145deg, #0f0f0f, #1f1f1f);
-    position: relative;
-  }
-  
-  video#camera,
-  canvas#canvas {
-    flex: 1;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .preview {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 13;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(20px);
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .preview img, .preview video {
-    max-width: 90%;
-    max-height: 60vh;
-    border-radius: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .top-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  #downloadBtn, #closeBtn {
-    padding: 10px 20px;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid white;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-  }
-  
-  #closeBtn:hover, #downloadBtn:hover {
-    background: rgba(255,255,255,0.4);
-  }
-  
-  /* .capture-wrapper {
-    position: absolute;
-    bottom: calc(30px + env(safe-area-inset-bottom));
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-  } */
-  .capture-wrapper {
-    position: fixed; /* Changed to fixed to ensure it stays visible on screen */
-    bottom: calc(30px + env(safe-area-inset-bottom)); /* Place the buttons just above the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 15px 25px;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    z-index: 10; /* Ensure it's above other elements */
-  }
-  
-  #captureBtn {
-    position: relative;
-    background: rgba(255,255,255,0.1);
-    border: 4px solid white;
-    color: white;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    font-size: 30px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-    overflow: hidden;
-  }
-  
-  #toggleCameraBtn {
-    position: relative;
-    background: rgba(255, 255, 255, 0.1);
-    border: 4px solid white;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-    margin-left: 20px;
-    z-index: 11; /* Ensure it is on top of other content */
-    visibility: visible; /* Make sure it's visible by default */
-  }
-  
-  #toggleCameraBtn.hidden {
-    visibility: hidden; /* Hide only when needed */
-  }
-  
-  #toggleCameraBtn:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  /* Media Queries for smaller screens */
-@media (max-width: 768px) {
-    #captureBtn {
-        width: 70px;
-        height: 70px;
-        font-size: 25px;
-    }
-
-    #toggleCameraBtn {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        margin-left: 10px;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-@media (max-width: 480px) {
-    #captureBtn {
-        width: 60px;
-        height: 60px;
-        font-size: 20px;
-    }
-
-    #toggleCameraBtn {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
-        margin-left: 5px;
-    }
+.container {
+  text-align: center;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-  .pulse-ring {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 3px solid #ffffff;
-    border-radius: 50%;
-    animation: none;
-    top: 0;
-    left: 0;
-    z-index: 0;
-  }
-  
-  .recording .pulse-ring {
-    animation: pulse 1s infinite;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.7;
-    }
-    70% {
-      transform: scale(1.4);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0;
-    }
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .recording {
-    box-shadow: 0 0 20px rgba(0, 153, 255, 0.8);
-    border-color: #00aaff;
-    background-color: rgba(0, 153, 255, 0.2);
-  }
-  
-  .recording .pulse-ring {
-    border-color: #00aaff;
-  }
-  
+button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: #fffc00;
+  color: #000;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #f5eb00;
+}
